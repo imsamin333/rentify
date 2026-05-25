@@ -22,7 +22,7 @@ function ListingCard({listing}) {
   return <>
 
     <div className='h-[340px] w-full md:w-[320px] shadow-xl flex flex-col items-center justify-center mt-1.5 mb-2.5'>
-        <div className='p-1 h-[130px] w-[250px] flex justify-center items-center rounded-md pb-1 mb-0.5 border-b-2'>
+        <div className='p-1 h-[130px] w-[200px] flex justify-center items-center rounded-md pb-1 mb-0.5 border-b-2'>
           <img src={service.getFileView(listing.images[0])} alt='no image' className='w-full h-full'/>
         </div>
         <div className='shadow-2xl w-[90%] flex justify-center items-center flex-col p-1 text-[13px]'>
