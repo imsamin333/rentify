@@ -3,7 +3,7 @@ import Mylistings from '../components/Mylistings'
 
 function MyListings() {
   return (
-    <div>
+    <div className='p-4 mt-16'>
       <Mylistings />
     </div>
   )

@@ -29,12 +29,20 @@ export const authSlice = createSlice({
     extraReducers: (builder)=>{
         builder.addCase(createAccountAuth.fulfilled,(state,action)=>{
             state.status = true;
-            state.userData = action.payload
+            state.userData = {
+            $id: action.payload.$id,
+            name: action.payload.name,
+            email: action.payload.email
+            }
         })
         
         builder.addCase(loginAuth.fulfilled,(state,action)=>{
             state.status = true;
-            state.userData = action.payload
+             state.userData = {
+            $id: action.payload.$id,
+            name: action.payload.name,
+            email: action.payload.email
+            }
         })
         builder.addCase(logoutAuth.fulfilled,(state,action)=>{
             state.status = false;
@@ -42,7 +50,11 @@ export const authSlice = createSlice({
         })
         builder.addCase(getcurrentuserAuth.fulfilled,(state,action)=>{
             state.status = action.payload ? true : false;
-            state.userData = action.payload
+            state.userData = action.payload ? {
+            $id: action.payload.$id,
+            name: action.payload.name,
+            email: action.payload.email
+            } : null
         })
 
     }

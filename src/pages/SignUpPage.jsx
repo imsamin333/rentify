@@ -3,7 +3,7 @@ import Signup from '../components/Signup'
 
 function SignUpPage() {
   return (
-    <div>
+    <div className='mt-16'>
       <Signup />
     </div>
   )

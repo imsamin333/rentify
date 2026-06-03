@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className='min-h-screen flex flex-col'>
-      <div className='flex justify-between items-center shadow-lg p-1.5 bg-blue-400  '>
+      <div className='fixed w-full flex justify-between items-center shadow-lg p-1.5 bg-blue-400  '>
         <img src={logo} alt="logo"  className='h-11 w-auto rounded-full ml-3' />
         <Navbar/>
       </div>

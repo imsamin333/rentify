@@ -7,7 +7,21 @@ export const fetchListings = createAsyncThunk(
     async(_,thunkAPI)=>{
         try {
             const res = await service.listPost()
-            return  res.documents;
+            // return  res.documents;
+            return res.documents.map(doc => ({
+                $id: doc.$id,
+                title: doc.title,
+                description: doc.description,
+                price: doc.price,
+                location: doc.location,
+                city: doc.city,
+                amenities: doc.amenities,
+                images: doc.images,
+                ownerId: doc.ownerId,
+                contactNumber: doc.contactNumber,
+                isAvailable: doc.isAvailable,
+            }))
+
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message)
         }
@@ -29,7 +43,22 @@ export const createListing = createAsyncThunk(
             const res = await service.createPost({
                 ...data,images: fileId ? [fileId] : []
             })
-            return res;
+            // return res;
+            return {
+                $id: res.$id,
+                title: res.title,
+                description: res.description,
+                price: res.price,
+                location: res.location,
+                city: res.city,
+                amenities: res.amenities,
+                images: res.images,
+                ownerId: res.ownerId,
+                contactNumber: res.contactNumber,
+                isAvailable: res.isAvailable,
+            }
+
+
         } catch (error) {
             if(fileId) await service.deleteFile(fileId)
             return thunkAPI.rejectWithValue(error.message)
@@ -54,7 +83,23 @@ export const updateListing = createAsyncThunk(
             if(data.images instanceof File && oldImageId){
                 await service.deleteFile(oldImageId);
             }
-            return res;
+            // return res;
+            return {
+                $id: res.$id,
+                title: res.title,
+                description: res.description,
+                price: res.price,
+                location: res.location,
+                city: res.city,
+                amenities: res.amenities,
+                images: res.images,
+                ownerId: res.ownerId,
+                contactNumber: res.contactNumber,
+                isAvailable: res.isAvailable,
+            }
+
+
+
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
         }

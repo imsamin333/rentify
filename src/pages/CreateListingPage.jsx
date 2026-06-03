@@ -10,7 +10,7 @@ function CreateListingPage() {
   
   
   return (
-    <div>
+    <div className='mt-16'>
       <CreateListing  lising={listing}/>
     </div>
   )
