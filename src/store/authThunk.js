@@ -7,8 +7,8 @@ export const createAccountAuth = createAsyncThunk(
     "auth/createAccountAuth",
     async({email,password,name},thunkAPI)=>{
         try {
-            const res = await authService.createAccount({email,password,name});
-            // return res;
+           await authService.createAccount({email, password, name})
+            const user = await authService.currentUser()
             return {
                 $id: user.$id,
                 name: user.name,
@@ -25,8 +25,13 @@ export const loginAuth = createAsyncThunk(
     "auth/loginAuth",
     async({email, password},thunkAPI)=>{
         try {
-            const res = await authService.logIn({email, password})
-            return res;
+            await authService.logIn({email, password})  // ✅ just login
+            const user = await authService.currentUser()  // ✅ then get user
+            return {
+                $id: user.$id,
+                name: user.name,
+                email: user.email
+            }
             
         } catch (error) {
             console.log("login thunk error", error)
@@ -42,6 +47,7 @@ export const getcurrentuserAuth = createAsyncThunk(
         try {
             const res = await authService.currentUser();
             // return res;
+            if(!res) return null;
              return {
                 $id: res.$id,
                 name: res.name,
@@ -59,12 +65,8 @@ export const logoutAuth = createAsyncThunk(
     async(_,thunkAPI)=>{
         try {
             const res = await authService.logOut();
-            // return true;
-            return {
-                $id: user.$id,
-                name: user.name,
-                email: user.email
-            }
+            return true;
+            
         } catch (error) {
             console.log("logout auth error",error)
             return thunkAPI.rejectWithValue(error.message);
